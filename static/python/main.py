@@ -39,13 +39,13 @@ async def http_request_demo():
 
 
 
-# print('Current Working Directory:')
-# print(os.getcwd())
+print('Current Working Directory:')
+print(os.getcwd())
 
-# print('Root directory contents:')
-# files = os.listdir('/')
-# for file in files:
-#         print(file)
+print('Root directory contents:')
+files = os.listdir('/')
+for file in files:
+        print(file)
   
 url = (
             "static/testdata/saft.xml"
