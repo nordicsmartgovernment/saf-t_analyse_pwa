@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="static/pyodide/pyscript.css" />
     <script defer src="static/pyodide/pyscript.min.js"></script>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     </head>
     <body>
     
@@ -22,12 +22,12 @@
                 lang = "python"
             
             [[fetch]]
-            from = "./static/python/"
+            from = "static/python/"
             files = ["saft2dataframe.py", "analyse.py", "request.py", "oppsett_for_lesing_av_lokal_fil.py"]
             
     
           </py-config>
-          <py-script src="/static/python/main.py">
+          <py-script src="static/python/main.py">
           </py-script>
     
     <div style="width: 45%; padding-right: 3%; padding-left: 2%; float: left">
@@ -84,6 +84,6 @@
       <py-terminal></py-terminal>
     </div>
       </body>
-    <script src="/static/js/main.js"></script>
+    <script src="static/js/main.js"></script>
     </body>
 </html>
