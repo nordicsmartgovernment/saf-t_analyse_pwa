@@ -48,7 +48,7 @@ async def http_request_demo():
 #         print(file)
   
 url = (
-            "/static/testdata/saft.xml"
+            "static/testdata/saft.xml"
         )
 saft = saft2dataframe(open_url(url))
 
