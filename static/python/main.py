@@ -5,7 +5,6 @@ from request import request  # import our request function.
 
 
 import pandas as pd
-# import os
 from pyodide.http import open_url
 
 from saft2dataframe import saft2dataframe
@@ -38,14 +37,14 @@ async def http_request_demo():
     print(f"DELETE request=> status:{new_post.status}, json:{await new_post.json()}")
 
 
+# import os
+# print('Current Working Directory:')
+# print(os.getcwd())
 
-print('Current Working Directory:')
-print(os.getcwd())
-
-print('Root directory contents:')
-files = os.listdir('/')
-for file in files:
-        print(file)
+# print('Root directory contents:')
+# files = os.listdir('/')
+# for file in files:
+#         print(file)
   
 url = (
             "static/testdata/saft.xml"

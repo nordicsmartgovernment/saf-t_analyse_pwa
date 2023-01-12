@@ -10,8 +10,64 @@
     <link rel="stylesheet" href="static/pyodide/pyscript.css" />
     <script defer src="static/pyodide/pyscript.min.js"></script>
     <link rel="manifest" href="manifest.json">
+
+    <style>
+      #page {
+        display: grid;
+        width: 100%;
+        height: 250px;
+        grid-template-areas:
+          "head head"
+          "nav  main"
+          "nav  foot"
+          "term term";
+        grid-template-rows: 200px auto 100px;
+        grid-template-columns: 150px 1fr;
+      }
+      
+      #page > header {
+        grid-area: head;
+        background-color: #fae2de;
+      }
+      
+      #page > nav {
+        grid-area: nav;
+        background-color: #fae2de;
+      }
+      
+      #page > main {
+        grid-area: main;
+        background-color: #fae2de;
+      }
+      
+      #page > footer {
+        grid-area: foot;
+        background-color: #fae2de;
+      }
+
+      #page > py-terminal {
+        grid-area: term;
+      }
+      
+      article {
+          display: grid;
+          grid-template: "kode resultat";
+          grid-template-columns: 1fr 1fr;
+      }
+
+      article > .kode {
+        grid-area: kode;
+
+      }
+
+      article > .resultat {
+        grid-area: resultat;
+
+      }
+      </style>
+      
     </head>
-    <body>
+    <body id="page">
     
         <py-config>
             packages = ["pandas"]
@@ -30,14 +86,24 @@
           <py-script src="static/python/main.py">
           </py-script>
     
-    <div style="width: 45%; padding-right: 3%; padding-left: 2%; float: left">
+      <header>
+      <div>
       <h1>Analyse av SAF-T-fil i nettleseren</h1>
       <p>
       Denne nettsiden lar deg åpne en SAF-T-fil, og bruke Python og pandas til å gjøre analyser av innholdet, uten at du trenger å ha Python installert på PC-en, alt kjører i nettleseren.
       </p>
       <p>Du kan bruke noen av de forhåndsdefinerte spørringene/analysene, enten direkte eller med egne tilpasninger, eller du kan skrive din egen kode </p>
       <p>I variabelen <code>saft</code> ligger det en pandas dataframe som inneholder alle transaksjonene fra SAF-T-fila. Prøv f.eks. <code>saft.info()</code> eller <code>saft.describe()</code> for å få litt informasjon om datasettet</p>
-      <p>Nettsiden kan også installeres lokalt. Fremgangsmåten varierer mellom de ulike nettleserne. I Vivaldi, høyreklikk på fanen og velg menyvalget "Installer Analyse av SAF-T-fil i nettleseren med Python og pandas". I Chrome, se eget installasjonsikon i adressefeltet.</p>
+      </div>
+    </header>
+
+      <nav>(nav)</nav>
+
+
+      <main>
+
+      <article>
+      <div class="kode">
       <h2>
         Velg SAF-T-fil
       </h2>
@@ -47,42 +113,83 @@
       <br />
       <label for="myfile">Velg fil:</label>
       <input type="file" id="myfile" name="myfile"/>
-      <br/>
-      <py-repl>
+      <br/> 
+      <py-repl output="velg_fil">
         # kjør denne cellen (Shift-Enter) for hente dataene
         # fra filen du har valgt
         import io
         saft = saft2dataframe(hent_saft_innhold())
       </py-repl>
-      <p id="content"></p>
+      </div>
+      <div class="resultat">
+        <h2>Resultat</h2>
+        <p id="velg_fil"></p>
+      </div>
+  
+    </article>
+
+
+      <article>
+      <div class="kode">
       <h2>Omsetningstall for en måned</h2>
       <p>Bytt ut datoene for å få den aktuelle tidsperioden. Dette er omsetningstallene SSB ber om dersom du er trukket ut til å besvare spørreskjema for varehandelsindeksen.</p>
-      <py-repl>
-        from pprint import pprint  # for penere formattering av resultatet
-        resultat = analyse(
-            from_and_included_date = '2017-01-01',
-            to_date = '2017-02-01',
-            from_and_included_account_id = 3000,
-            to_account_id = 4000,
-            df = saft,  # "saft" er en dataframe med dataene fra xml-fila. Prøv "saft.info()"      
-        )
-        pprint(resultat)
+      <py-repl output="omsetningstall_mnd">
+        saft.loc[
+        (    # filtering transactions:
+            saft['Transaction.TransactionDate'] >= '2017-01-01')     
+            & (saft['Transaction.TransactionDate'] < '2017-02-01')   
+            & (saft['Line.AccountID'] >= 3000)          
+            & (saft['Line.AccountID'] < 4000)] \
+            [[  
+            'Line.DebitAmount.Amount',  # selecting the amount-columns
+            'Line.TaxAmount.Amount',
+            'Line.CreditAmount.Amount',]].sum()
+    
+      </py-repl>
+    </div>
+    <div class="resultat">
+      <h2>Resultat</h2>
+      <p id="omsetningstall_mnd"></p>
+    </div>
+    </article>
 
-      </py-repl>
+
+<article>
+  <div class="kode">
       <h2>Info om dataene</h2>
-      <py-repl>
-        print(saft.info())  # gir informasjon om alle kolonnene
+      <py-repl output="info_om_dataene">
+        saft.info()  # gir informasjon om alle kolonnene
+        saft.describe()  # beregner statistiske nøkkeltall for de numeriske dataene
       </py-repl>
-      <py-repl>
-        print(saft.describe())  # beregner statistiske nøkkeltall for de numeriske dataene
-      </py-repl>
-      <h2>Demo av http-forespørsler</h2>
+    </div>
+    <div class="resultat">
+      <h2>Resultat</h2>
+      <p id="info_om_dataene"></p>
+    </div>
+    </article>
+
+
+
+<article>
+  <div class="kode">
+    <h2>Demo av http-forespørsler</h2>
       <p>Se main.py for selve koden, nedenfor er kallet som kjører demo-funksjonen</p>
-      <py-repl>asyncio.ensure_future(http_request_demo())</py-repl>
+      <py-repl output="http-demo">asyncio.ensure_future(http_request_demo())</py-repl>
     </div>
-      <div style="width: 40%; padding-left: 10%; float: right"
-      <py-terminal></py-terminal>
+    <div class="resultat">
+      <h2>Resultat</h2>
+      <p id="http-demo"></p>
     </div>
+
+  </article>
+
+
+  </main>
+  <footer>
+    <p>Disclaimer: Dette er eksperimentell kode for å teste et konsept, og det tas ikke ansvar for at koden gir korrekte resultater.</p>
+      <p>Nettsiden kan også installeres lokalt. Fremgangsmåten varierer mellom de ulike nettleserne. I Vivaldi, høyreklikk på fanen og velg menyvalget "Installer Analyse av SAF-T-fil i nettleseren med Python og pandas". I Chrome, se eget installasjonsikon i adressefeltet.</p>
+  </footer>
+  <py-terminal></py-terminal>
       </body>
     <script src="./static/js/main.js"></script>
     </body>

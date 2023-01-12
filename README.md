@@ -13,12 +13,14 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 ## Todo
 - DONE (delvis): Oppsett av webapplikasjonen for lokal installasjon (manifest.json m.m.). Status: Har på plass et minimum, men kan bruke Google Dev Tools Ligthouse til å forbedre det.
 - DONE! Sørge for at alle filene som aksesseres er tilgjengelige lokalt, istedenfor å hentes over nettet fra pyscript.net
-- DONE - delvis: Mulighet for å åpne lokal fil. MEN: det ser ut som ikke hele innholdet leses ... Noe som hindrer at hele fila blir lest? Ser ut som den er komplett, inneholder avslutningstag osv, men delen av fila med transaksjoner er mye kortere enn den opprinnelige filen. Merkelig. Har jeg samme fil ... ???? DUST!! Du har brukt to ulike filer ... det har virket hele tiden ... :)
+- DONE! Mulighet for å åpne lokal fil. MEN: det ser ut som ikke hele innholdet leses ... Noe som hindrer at hele fila blir lest? Ser ut som den er komplett, inneholder avslutningstag osv, men delen av fila med transaksjoner er mye kortere enn den opprinnelige filen. Merkelig. Har jeg samme fil ... ???? DUST!! Du har brukt to ulike filer ... det har virket hele tiden ... :)
 - DONE! Lese lokal SAF-T-fil (eksempelfil fra Skattetatens github) inn i en pandas dataframe (basert på saft2dataframe)
 - Legge til noen eksempler på spørringer som kan kjøres
-- Strukturere koden hensiktsmessig
-- Publisere koden på Github
-- Publisere webapplikasjonen, f.eks. via github pages
+- Strukturere koden mer hensiktsmessig
+- Legge til en visualisering
+- Mer ryddig og pen side (påbegynt)
+- DONE! Publisere koden på Github
+- DONE! Publisere webapplikasjonen, f.eks. via github pages
 - gjøre saft2dataframe til en pakke som kan gjenbrukes i ulike prosjekter
 - bruke Google Lighthouse til å forbedre web-applikasjonen, inkludert sikre at den fungerer på andre typer enheter som nettbrett og mobil
 - flere eksempler på analyse
@@ -38,3 +40,6 @@ Ulike aktører kan kanskje lage sin versjon av web-applikasjonen, som krever inn
 
 ## Utviklingsmiljø
 For å være sikker på at endringer blir reflektert i applikasjonen har jeg brukt en http-server som har no-cache-direktiver for alle filene. Koden for denne (NoCacheHTTPServer.py) [fant jeg på Stack Overflow](https://stackoverflow.com/a/62482117).
+
+## Læringspunkter
+Det er litt vanskelig å forutsi hvor resultatet av koden som kjører, blir vist. Hvis det brukes "print()" kommer resultatet til terminal-elementet (py-terimnal), men ellers kommer det rett etter der koden står, eller eventuelt i elementet jeg spesifiserer at det skal. Det er forsåvidt ryddig så lenge jeg bestemmer selv om jeg skal bruke print() eller ei. Men noen andre funksjoner, som f.eks. df.info() bruker også print (tydeligvis ...), mens df.describe() ikke gjør det.
