@@ -18,7 +18,7 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - Legge til noen eksempler på spørringer som kan kjøres
 - Strukturere koden mer hensiktsmessig
 - Legge til en visualisering
-- Mer ryddig og pen side (påbegynt)
+- DONE! Mer ryddig og pen side (påbegynt)
 - DONE! Publisere koden på Github
 - DONE! Publisere webapplikasjonen, f.eks. via github pages
 - gjøre saft2dataframe til en pakke som kan gjenbrukes i ulike prosjekter
@@ -26,6 +26,7 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - flere eksempler på analyse
 - DONE (delvis): finne måte å sende resultatet til en mottaker med ett klikk, f.eks. med et api-kall
 - Tester!
+- Endre til å be brukeren velge en fil som default, men ha Skatteetatens testfil som backup
 
 ## Kommunisere med andre nettsteder?
 Det er mulig å gjøre API-kall, både GET, POST, PUT osv fra PyScript. Den vanligste pakken for dette i Python, requests, er ikke tilgjengelige, men det er [en egen oppskrift på PyScripts nettsider](https://docs.pyscript.net/latest/guides/http-requests.html) og fila ```request.py``` er kopiert fra den oppskriften.
