@@ -19,7 +19,7 @@
         grid-template-areas:
           "head head"
           "nav  main"
-          "nav  foot"
+          "foot  foot"
           "term term";
         grid-template-rows: 200px auto 100px;
         grid-template-columns: 150px 1fr;
@@ -27,22 +27,26 @@
       
       #page > header {
         grid-area: head;
-        background-color: #fae2de;
+        background-color: white;
+        margin-left: 2%;
       }
       
       #page > nav {
         grid-area: nav;
-        background-color: #fae2de;
+        background-color: white;
       }
       
       #page > main {
         grid-area: main;
-        background-color: #fae2de;
+        background-color: white;
       }
       
       #page > footer {
+        font-style: italic;
         grid-area: foot;
-        background-color: #fae2de;
+        background-color: white;
+        margin-left: 10pt;
+        border-top: solid blue;
       }
 
       #page > py-terminal {
@@ -53,15 +57,19 @@
           display: grid;
           grid-template: "kode resultat";
           grid-template-columns: 1fr 1fr;
+          border-top: thin solid black;
+          margin-bottom: 2pt;
       }
 
       article > .kode {
         grid-area: kode;
+        margin-left: 10pt;
 
       }
 
       article > .resultat {
         grid-area: resultat;
+        margin-left: 10pt;
 
       }
       </style>
@@ -97,7 +105,7 @@
       </div>
     </header>
 
-      <nav>(nav)</nav>
+      <nav>.</nav>
 
 
       <main>
