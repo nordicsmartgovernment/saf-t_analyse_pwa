@@ -179,7 +179,33 @@
     </div>
     </article>
 
-
+<article>
+  <div class="kode">
+      <h2>Omsetning pr måned</h2>
+      <p>Måned angis som tallene 1-12. Testdataen fra Skatteetaten har bare tall for perioden januar til april (1-4)</p>
+      <py-repl output="omsetning_pr_måned">
+        saft.loc[( # filtrerer på relevante konti
+        saft['Line.AccountID'] >= 3000) 
+        & (saft['Line.AccountID'] < 4000
+        )]\
+        [[ # velger relevante kolonner
+            'Transaction.TransactionDate',
+            'Line.DebitAmount.Amount', 
+            'Line.TaxAmount.Amount', 
+            'Line.CreditAmount.Amount'
+        ]]\
+        .set_index('Transaction.TransactionDate',)\
+        .groupby([lambda x: x.month])\
+        .sum()
+    
+      </py-repl>
+    </div>
+    <div class="resultat">
+      <h2>Resultat</h2>
+      <p id="omsetning_pr_måned"></p>
+    </div>
+    </article>
+    
 
 <article>
   <div class="kode">

@@ -13,3 +13,23 @@ saft.info()
 # Visualisere omsetning
 # Rapportere til fake API omsetning
 # 
+
+# Starter med omsetning pr måned
+saft[['Transaction.TransactionDate', 'Line.AccountID', 'Line.DebitAmount.Amount', 'Line.CreditAmount.Amount']]
+# %%
+df = saft.loc[( # filtrerer på relevante konti
+    saft['Line.AccountID'] >= 3000) 
+    & (saft['Line.AccountID'] < 4000
+)]\
+    [[ # velger relevante kolonner
+        'Transaction.TransactionDate',
+        'Line.DebitAmount.Amount', 
+        'Line.TaxAmount.Amount', 
+        'Line.CreditAmount.Amount'
+    ]]\
+    .set_index('Transaction.TransactionDate',)\
+    .groupby([lambda x: x.month])\
+    .sum()
+# %%
+df.plot()
+# %%
