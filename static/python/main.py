@@ -9,8 +9,9 @@ from pyodide.http import open_url
 
 from saft2dataframe import saft2dataframe
 from analyse import analyse
-from oppsett_for_lesing_av_lokal_fil import oppsett_for_lesing_av_lokal_fil, hent_saft_innhold
+from oppsett_for_lesing_av_lokal_fil import oppsett_for_lesing_av_lokal_fil, hent_saft_innhold  # sistnevnte brukes ikke her, men i index.html
 
+import s
 
 # For demo av http-forespørsler ved hjelp av request.py
 # kjøres med asyncio.ensure_future(http_request_demo())
@@ -46,10 +47,6 @@ async def http_request_demo():
 # for file in files:
 #         print(file)
   
-url = (
-            "static/testdata/saft.xml"
-        )
-saft = saft2dataframe(open_url(url))
 
 
 oppsett_for_lesing_av_lokal_fil()

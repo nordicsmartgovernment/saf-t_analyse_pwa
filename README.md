@@ -26,7 +26,8 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - flere eksempler på analyse
 - DONE (delvis): finne måte å sende resultatet til en mottaker med ett klikk, f.eks. med et api-kall
 - Tester!
-- Endre til å be brukeren velge en fil som default, men ha Skatteetatens testfil som backup
+- DONE! Endre til å be brukeren velge en fil som default, men ha Skatteetatens testfil som backup
+- DONE! Endre slik at koden for å lese lokal fil kjøres automatisk, istedenfor at den må kjøres manuelt. MEN: Krever en uelegant global variabel. Kan vurdere å flytte filbehandlingskoden til main, kanskje?
 
 ## Kommunisere med andre nettsteder?
 Det er mulig å gjøre API-kall, både GET, POST, PUT osv fra PyScript. Den vanligste pakken for dette i Python, requests, er ikke tilgjengelige, men det er [en egen oppskrift på PyScripts nettsider](https://docs.pyscript.net/latest/guides/http-requests.html) og fila ```request.py``` er kopiert fra den oppskriften.

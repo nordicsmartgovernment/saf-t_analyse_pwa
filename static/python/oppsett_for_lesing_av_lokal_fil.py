@@ -5,8 +5,14 @@ import js
 from js import document, FileReader
 from pyodide import create_proxy
 import io
+from saft2dataframe import saft2dataframe
+import pandas as pd
 
-saft_innhold = ""  # global variabel
+import s
+
+saft_innhold = ""  # global variabel, teksten fra saft-fila
+# saft = pd.DataFrame()  # global variabel
+
 
 def hent_saft_innhold() -> io.StringIO:
     if saft_innhold == "":
@@ -16,13 +22,18 @@ def hent_saft_innhold() -> io.StringIO:
         print(f'Her er saft_innhold: {saft_innhold[:100]}')
         return io.StringIO(saft_innhold)
 
-def read_complete(event):
+def read_complete(event) -> pd.DataFrame:
 # event is ProgressEvent
 
     content = document.getElementById("content")
     global saft_innhold
     saft_innhold = event.target.result
     print(f'Har oppdatert saft_innhold: {saft_innhold[:100]}')
+
+    # kjør denne cellen (Shift-Enter) for hente dataene
+    # fra filen du har valgt
+    s.aft = saft2dataframe(hent_saft_innhold())
+    print(f'har oppdatert s.aft dataframe')
 
 
 async def process_file(x):
@@ -41,7 +52,7 @@ async def process_file(x):
 
         reader.readAsText(f)
 
-        return
+        return  # lurer litt på hvorfor det er return inne i for-løkken ... kanskje en typo av meg?
 
 
 def oppsett_for_lesing_av_lokal_fil():
