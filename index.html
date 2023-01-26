@@ -87,7 +87,7 @@
             
             [[fetch]]
             from = "static/python/"
-            files = ["saft2dataframe.py", "analyse.py", "request.py", "oppsett_for_lesing_av_lokal_fil.py", "s.py"]
+            files = ["saft2dataframe.py", "analyse.py", "request.py"]
             
     
           </py-config>
@@ -101,7 +101,7 @@
       Denne nettsiden lar deg åpne en SAF-T-fil, og bruke Python og pandas til å gjøre analyser av innholdet, uten at du trenger å ha Python installert på PC-en, alt kjører i nettleseren.
       </p>
       <p>Du kan bruke noen av de forhåndsdefinerte spørringene/analysene, enten direkte eller med egne tilpasninger, eller du kan skrive din egen kode </p>
-      <p>I variabelen <code>s.aft</code> ligger det en pandas dataframe som inneholder alle transaksjonene fra SAF-T-fila. Prøv f.eks. <code>s.aft.info()</code> eller <code>s.aft.describe()</code> for å få litt informasjon om datasettet</p>
+      <p>I variabelen <code>saft</code> ligger det en pandas dataframe som inneholder alle transaksjonene fra SAF-T-fila. Prøv f.eks. <code>saft.info()</code> eller <code>saft.describe()</code> for å få litt informasjon om datasettet</p>
       </div>
     </header>
 
@@ -129,7 +129,7 @@
         url = (
             "static/testdata/saft.xml"
         )
-        s.aft = saft2dataframe(open_url(url))
+        saft = saft2dataframe(open_url(url))
       </py-repl>
       </div>
       <div class="resultat">
@@ -145,12 +145,12 @@
       <h2>Omsetningstall for en måned</h2>
       <p>Bytt ut datoene for å få den aktuelle tidsperioden. Dette er omsetningstallene SSB ber om dersom du er trukket ut til å besvare spørreskjema for varehandelsindeksen.</p>
       <py-repl output="omsetningstall_mnd">
-        s.aft.loc[
+        saft.loc[
         (    # filtering transactions:
-            s.aft['Transaction.TransactionDate'] >= '2017-01-01')     
-            & (s.aft['Transaction.TransactionDate'] < '2017-02-01')   
-            & (s.aft['Line.AccountID'] >= 3000)          
-            & (s.aft['Line.AccountID'] < 4000)] \
+            saft['Transaction.TransactionDate'] >= '2017-01-01')     
+            & (saft['Transaction.TransactionDate'] < '2017-02-01')   
+            & (saft['Line.AccountID'] >= 3000)          
+            & (saft['Line.AccountID'] < 4000)] \
             [[  
             'Line.DebitAmount.Amount',  # selecting the amount-columns
             'Line.TaxAmount.Amount',
@@ -169,8 +169,8 @@
   <div class="kode">
       <h2>Info om dataene</h2>
       <py-repl output="info_om_dataene">
-        print(s.aft.info())  # gir informasjon om alle kolonnene
-        s.aft.describe()  # beregner statistiske nøkkeltall for de numeriske dataene
+        print(saft.info())  # gir informasjon om alle kolonnene
+        saft.describe()  # beregner statistiske nøkkeltall for de numeriske dataene
       </py-repl>
     </div>
     <div class="resultat">
