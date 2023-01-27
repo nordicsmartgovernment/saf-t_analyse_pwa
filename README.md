@@ -18,7 +18,7 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - Legge til noen eksempler på spørringer som kan kjøres
 - Strukturere koden mer hensiktsmessig
 - DONE! Legge til en visualisering
-- DONE! Mer ryddig og pen side (påbegynt)
+- DONE (delvis)! Mer ryddig og pen side (påbegynt). Justere rekkefølge, endre overskrifter etc
 - DONE! Publisere koden på Github
 - DONE! Publisere webapplikasjonen, f.eks. via github pages
 - gjøre saft2dataframe til en pakke som kan gjenbrukes i ulike prosjekter
