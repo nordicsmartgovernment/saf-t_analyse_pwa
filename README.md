@@ -17,7 +17,7 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - DONE! Lese lokal SAF-T-fil (eksempelfil fra Skattetatens github) inn i en pandas dataframe (basert på saft2dataframe)
 - Legge til noen eksempler på spørringer som kan kjøres
 - Strukturere koden mer hensiktsmessig
-- Legge til en visualisering
+- DONE! Legge til en visualisering
 - DONE! Mer ryddig og pen side (påbegynt)
 - DONE! Publisere koden på Github
 - DONE! Publisere webapplikasjonen, f.eks. via github pages
