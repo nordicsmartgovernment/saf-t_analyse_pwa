@@ -209,7 +209,8 @@
 <article>
   <div class="kode">
       <h2>Graf for omsetning pr måned</h2>
-      <p>Måned angis som tallene 1-12. Testdataen fra Skatteetaten har bare tall for perioden januar til april (1-4). Merk at det kan ta et par sekunder før grafen dukker opp.</p>
+      <p>Måned angis som tallene 1-12. Testdataen fra Skatteetaten har bare tall for perioden januar til april (1-4). 
+      </p><p>Merk at det kan ta et par sekunder før grafen dukker opp.</p>
       <py-repl output="graf_for_omsetning_pr_måned">
         import matplotlib.pyplot as plt
 
@@ -237,6 +238,40 @@
       <p id="graf_for_omsetning_pr_måned"></p>
     </div>
     </article>
+
+<article>
+  <div class="kode">
+    <h2>Rapportering - til mottakers API</h2>
+    <p>Sender omsetningstall for en spesifikk måned til et dummy-API 
+    </p>
+    <py-repl output="rapportering_til_api">
+      async def rapporter(data, baseurl):
+        headers = {"Content-type": "application/json"}
+        new_post = await request(f"{baseurl}/posts", body=data, method="POST", headers=headers)
+        print(f"Har POSTet følgende json: {await new_post.json()}, status ble: {new_post.status}")
+  
+      baseurl = "https://jsonplaceholder.typicode.com"
+
+      data = saft.loc[
+      (    # filtering transactions:
+          saft['Transaction.TransactionDate'] >= '2017-01-01')     
+          & (saft['Transaction.TransactionDate'] < '2017-02-01')   
+          & (saft['Line.AccountID'] >= 3000)          
+          & (saft['Line.AccountID'] < 4000)] \
+          [[  
+          'Line.DebitAmount.Amount',  # selecting the amount-columns
+          'Line.TaxAmount.Amount',
+          'Line.CreditAmount.Amount',]].sum().to_json()
+
+      asyncio.ensure_future(rapporter(data, baseurl))
+  </py-repl>
+  </div>
+  <div class="resultat">
+      <h2>Resultat</h2>
+      <p>(Se resultatet i terminalvinduet nederst på siden.)</p>
+      <p id="rapportering_til_api"></p>
+  </div>
+</article>
     
 
 <article>

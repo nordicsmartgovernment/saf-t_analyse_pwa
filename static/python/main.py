@@ -1,15 +1,16 @@
-# For http-operasjoner
 import asyncio
 import io
 import json
 
 import js
 import pandas as pd
-from analyse import analyse
 from js import FileReader, document
 from pyodide import create_proxy
 from pyodide.http import open_url
-from request import request  # import our request function.
+from request import request  # request-funksjonen fra pyscript, siden 'requests' mangler
+
+# egne moduler
+from analyse import analyse
 from saft2dataframe import saft2dataframe
 
 

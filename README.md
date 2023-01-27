@@ -24,7 +24,7 @@ Koden er basert på John Hanleys artikler som viser [hvordan man kan bruke PyScr
 - gjøre saft2dataframe til en pakke som kan gjenbrukes i ulike prosjekter
 - bruke Google Lighthouse til å forbedre web-applikasjonen, inkludert sikre at den fungerer på andre typer enheter som nettbrett og mobil
 - flere eksempler på analyse
-- DONE (delvis): finne måte å sende resultatet til en mottaker med ett klikk, f.eks. med et api-kall
+- DONE: finne måte å sende resultatet til en mottaker med ett klikk, f.eks. med et api-kall
 - Tester!
 - DONE! Endre til å be brukeren velge en fil som default, men ha Skatteetatens testfil som backup
 - DONE! Endre slik at koden for å lese lokal fil kjøres automatisk, istedenfor at den må kjøres manuelt. 
