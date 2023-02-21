@@ -52,6 +52,7 @@ def hent_saft_innhold() -> io.StringIO:
         return None
     else:
         print(f'Her er saft_innhold: {saft_innhold[:100]}')
+
         return io.StringIO(saft_innhold)
 
 def read_complete(event) -> pd.DataFrame:
@@ -66,6 +67,9 @@ def read_complete(event) -> pd.DataFrame:
     # fra filen du har valgt
     saft = saft2dataframe(hent_saft_innhold())
     print(f'har oppdatert saft dataframe')
+    main_element = document.getElementsByTagName('main')
+    main_element[0].style.display = 'block'
+
 
 
 async def process_file(x):

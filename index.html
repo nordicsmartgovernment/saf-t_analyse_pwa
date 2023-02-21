@@ -21,7 +21,7 @@
           "nav  main"
           "foot  foot"
           "term term";
-        grid-template-rows: 200px auto 100px;
+        grid-template-rows: 600px auto 100px;
         grid-template-columns: 150px 1fr;
       }
       
@@ -39,6 +39,7 @@
       #page > main {
         grid-area: main;
         background-color: white;
+        display: none;
       }
       
       #page > footer {
@@ -102,18 +103,9 @@
       </p>
       <p>Du kan bruke noen av de forhåndsdefinerte spørringene/analysene, enten direkte eller med egne tilpasninger, eller du kan skrive din egen kode </p>
       <p>I variabelen <code>saft</code> ligger det en pandas dataframe som inneholder alle transaksjonene fra SAF-T-fila. Prøv f.eks. <code>saft.info()</code> eller <code>saft.describe()</code> for å få litt informasjon om datasettet</p>
-      </div>
-    </header>
-
-      <nav>.</nav>
-
-
-      <main>
-
-      <article>
-      <div class="kode">
+      <div>
       <h2>
-        Velg SAF-T-fil
+        Aller først: Last opp SAF-T-fil
       </h2>
       <p>
         
@@ -125,19 +117,30 @@
       <p>Dersom du ikke har en egen SAF-T-fil, kan du kjøre koden nedenfor for å laste en eksempelfil fra Skatteetaten, slik at du kan teste de andre funksjonene her.
         NB! Merk at koden nedenfor bare er testet på Skatteetatens eksempelfil.</p>
 
-      <py-repl output="velg_fil">
+      <py-repl>
         url = (
             "static/testdata/saft.xml"
         )
         saft = saft2dataframe(open_url(url))
+
+        main_element = document.getElementsByTagName('main') # nå kan vi hente frem eksemplene
+        main_element[0].style.display = 'block'
+
         f'Variabelen "saft" er nå av typen {type(saft)} og er {len(saft)} rader lang'
       </py-repl>
+      </div>  
+
+
       </div>
-      <div class="resultat">
-        <h2>Resultat</h2>
-        <p id="velg_fil"></p>
-      </div>
-  
+    </header>
+
+      <nav>.</nav>
+
+
+      <main>
+
+      <article>
+      
     </article>
 
 
