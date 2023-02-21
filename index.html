@@ -130,6 +130,7 @@
             "static/testdata/saft.xml"
         )
         saft = saft2dataframe(open_url(url))
+        f'Variabelen "saft" er nå av typen {type(saft)} og er {len(saft)} rader lang'
       </py-repl>
       </div>
       <div class="resultat">
@@ -145,7 +146,7 @@
       <h2>Omsetningstall for en måned</h2>
       <p>Bytt ut datoene for å få den aktuelle tidsperioden. Dette er omsetningstallene SSB ber om dersom du er trukket ut til å besvare spørreskjema for varehandelsindeksen.</p>
       <py-repl output="omsetningstall_mnd">
-        saft.loc[
+        resultat = saft.loc[
         (    # filtering transactions:
             saft['Transaction.TransactionDate'] >= '2017-01-01')     
             & (saft['Transaction.TransactionDate'] < '2017-02-01')   
@@ -155,12 +156,61 @@
             'Line.DebitAmount.Amount',  # selecting the amount-columns
             'Line.TaxAmount.Amount',
             'Line.CreditAmount.Amount',]].sum()
+        
+        f'''Resultatet:  
+        Debit: {resultat['Line.DebitAmount.Amount']} | 
+        Skatt: {resultat['Line.TaxAmount.Amount']} | 
+        Kredit: {resultat[ 'Line.CreditAmount.Amount']}'''
     
       </py-repl>
     </div>
     <div class="resultat">
       <h2>Resultat</h2>
       <p id="omsetningstall_mnd"></p>
+    </div>
+    </article>
+
+
+      <article>
+      <div class="kode">
+      <h2>Omsetningstall for en måned - alternativ løsning</h2>
+      <p>Her er den samme koden som i eksempelet over, lagt inn i en funksjon kalt
+      <code>omsetning</code>
+      som kan kalles
+      med parametrene år og måned. Da slipper brukeren å se all koden, hvis de ikke er 
+      interessert, men kan samtidig enkelt få tilgang til den ved å se i kildekoden til dokumentet.</p>
+      <p style="font-size: small">En åpenbar fordel med denne tilnærmingen er at funksjonen kan suppleres med kode for å gjøre
+      den mer robust, fange opp feil og gi bedre tilbakemeldinger, for eksempel hvis brukeren
+      ber om omsetning for perioder det ikke finnes data for. (Men det er ikke lagt inn i eksempelet,
+      altså ...)</p>
+      <py-script>
+      def omsetning(år: int, måned: int) -> str:
+        fra = f'{år}-{måned}-01'
+        til = f'{år}-{måned + 1}-01'
+        resultat = saft.loc[
+              (    # filtering transactions:
+                  saft['Transaction.TransactionDate'] >= '2017-01-01')     
+                  & (saft['Transaction.TransactionDate'] < '2017-02-01')   
+                  & (saft['Line.AccountID'] >= 3000)          
+                  & (saft['Line.AccountID'] < 4000)] \
+                  [[  
+                  'Line.DebitAmount.Amount',  # selecting the amount-columns
+                  'Line.TaxAmount.Amount',
+                  'Line.CreditAmount.Amount',]].sum()
+        
+        return f'''Resultatet:  
+              Debit: {resultat['Line.DebitAmount.Amount']} | 
+              Skatt: {resultat['Line.TaxAmount.Amount']} | 
+              Kredit: {resultat[ 'Line.CreditAmount.Amount']}'''
+      </py-script>
+
+      <py-repl output="omsetningstall_mnd_alternativ">
+      omsetning(2017, 1)    
+      </py-repl>
+    </div>
+    <div class="resultat">
+      <h2>Resultat</h2>
+      <p id="omsetningstall_mnd_alternativ"></p>
     </div>
     </article>
 
