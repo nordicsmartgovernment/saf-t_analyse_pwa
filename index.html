@@ -189,8 +189,8 @@
         til = f'{år}-{måned + 1}-01'
         resultat = saft.loc[
               (    # filtering transactions:
-                  saft['Transaction.TransactionDate'] >= '2017-01-01')     
-                  & (saft['Transaction.TransactionDate'] < '2017-02-01')   
+                  saft['Transaction.TransactionDate'] >= fra)     
+                  & (saft['Transaction.TransactionDate'] < til)   
                   & (saft['Line.AccountID'] >= 3000)          
                   & (saft['Line.AccountID'] < 4000)] \
                   [[  
